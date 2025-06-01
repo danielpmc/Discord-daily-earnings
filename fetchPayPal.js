@@ -21,10 +21,14 @@ async function getPayPalEarningsUSD() {
   const accessToken = await getAccessToken();
 
   const today = new Date();
-  const startDate = new Date();
+  const yesterday = new Date(today);
+  yesterday.setUTCDate(today.getUTCDate() - 1);
+
+  const startDate = new Date(yesterday);
   startDate.setUTCHours(0, 0, 0, 0);
   const start = startDate.toISOString();
-  const endDate = new Date();
+
+  const endDate = new Date(yesterday);
   endDate.setUTCHours(23, 59, 59, 999);
   const end = endDate.toISOString();
 
