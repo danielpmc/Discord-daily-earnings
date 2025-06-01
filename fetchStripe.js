@@ -3,8 +3,8 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 async function getStripeEarningsUSD() {
   const now = new Date();
-  const todayStart = new Date(now.setHours(0, 0, 0, 0)) / 1000;
-  const todayEnd = new Date(now.setHours(23, 59, 59, 999)) / 1000;
+  const todayStart = Math.floor(new Date(now.setHours(0, 0, 0, 0)).getTime() / 1000);
+  const todayEnd = Math.floor(new Date(now.setHours(23, 59, 59, 999)).getTime() / 1000);
 
   const charges = await stripe.charges.list({
     created: {
