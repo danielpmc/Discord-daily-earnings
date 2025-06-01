@@ -21,8 +21,12 @@ async function getPayPalEarningsUSD() {
   const accessToken = await getAccessToken();
 
   const today = new Date();
-  const start = new Date(today.setHours(0, 0, 0, 0)).toISOString();
-  const end = new Date(today.setHours(23, 59, 59, 999)).toISOString();
+  const startDate = new Date();
+  startDate.setUTCHours(0, 0, 0, 0);
+  const start = startDate.toISOString();
+  const endDate = new Date();
+  endDate.setUTCHours(23, 59, 59, 999);
+  const end = endDate.toISOString();
 
   const response = await axios.get(
     `https://api-m.paypal.com/v1/reporting/transactions?start_date=${start}&end_date=${end}`,
